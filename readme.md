@@ -1,4 +1,4 @@
-store your code logic in one object
+<center><h3>store your code logic in one object</h3></center>
 
 <b>Use cases</b>
 
