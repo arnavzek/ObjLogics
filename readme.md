@@ -7,18 +7,19 @@
   3. sending code on a network<br>
   4.same logic for all languages
   
-<b>How to</b>
+<b>How to</b><br>
 
-``{function name:{parameter} }`` and parameter can be functions 
+``{function name:{parameter} }`` and parameter can be functions <br>
 
 you call ``parse(object)`` and your logic gets executed
   
     
-<b>Example</b>
+<b>Example</b><br>
 ``var logic = {isEqual:{minus:{data2:20,data1:20},secondParam:0} } //secondParam,data2,data1 are arbitary 
 document.body.innerHTML = parse(logic)
 ``
-<b>built in function</b>
+<br>
+<b>built in function</b><br>
 
 add, minus ,divide, remainder, isBig, IsSmall, isEqual
 
