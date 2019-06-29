@@ -1,10 +1,10 @@
-<h3><center>Store your code logic in the form of JSON aka objects </center></h3>
+<center>Store your code logic in the form of JSON aka objects </center>
 
 <b>Use cases</b>
 
-  1. A game where players can make game
+  1. A game where players can make game<br>
   2. Remote coding or on the go coding (it's a made up terminology, the idea is we can deploy an application once and then update logic by simply updating a object inside your database)
-  3. sending code on a network
+  3. sending code on a network<br>
   4.same logic for all languages
   
 <b>How to</b>
