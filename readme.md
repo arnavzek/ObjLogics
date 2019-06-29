@@ -12,7 +12,12 @@
 ``{function name:{parameter} }`` and parameter can be functions 
 
 you call ``parse(object)`` and your logic gets executed
-
+  
+    
+<b>Example</b>
+``var logic = {isEqual:{minus:{data2:20,data1:20},secondParam:0} } //secondParam,data2,data1 are arbitary 
+document.body.innerHTML = parse(logic)
+``
 <b>built in function</b>
 
 add, minus ,divide, remainder, isBig, IsSmall, isEqual
@@ -20,3 +25,5 @@ add, minus ,divide, remainder, isBig, IsSmall, isEqual
 #How to declare a function
 
 just declare them
+
+#Please propose new functions
