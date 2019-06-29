@@ -18,13 +18,13 @@ you call ``parse(object)`` and your logic gets executed
 ``var logic = {isEqual:{minus:{data2:20,data1:20},secondParam:0} } //secondParam,data2,data1 are arbitary 
 document.body.innerHTML = parse(logic)
 ``
-<br>
+<br><br>
 <b>built in function</b><br>
 
 add, minus ,divide, remainder, isBig, IsSmall, isEqual
-
+<br><br>
 #How to declare a function
 
 just declare them
-
+<br><br>
 #Please propose new functions
