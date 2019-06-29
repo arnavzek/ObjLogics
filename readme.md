@@ -1,4 +1,4 @@
-<h3><center>store your code logic in the form of JSON aka objects </center></h3>
+<h3><center>Store your code logic in the form of JSON aka objects </center></h3>
 
 <b>Use cases</b>
 
