@@ -1,18 +1,18 @@
 store your code logic in one object
 
-#Use cases
+<b>Use cases</b>
 
   1. A game where players can make game
   2. Remote coding or on the go coding (it's a made up terminology, the idea is we can deploy an application once and then update logic by simply updating a object inside your database)
-  3. 
+  3. sending code on a network
   
-#How to 
+<b>How to</b>
 
-{function name:{parameter} } and parameter can be functions 
+``{function name:{parameter} }`` and parameter can be functions 
 
-you call parse(object) and your logic gets executed
+you call ``parse(object)`` and your logic gets executed
 
-#built in function
+<b>built in function</b>
 
 add, minus ,divide, remainder, isBig, IsSmall, isEqual
 
