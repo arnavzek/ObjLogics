@@ -1,9 +1,30 @@
-var marline = {isbig:{data1:10,data2:20} }
-// var marline = {data1:10}
-function isbig(on){
+function isBig(on){
  return on[0] > on[1]? true:false
 }
 
+function isSmall(on){
+  return on[0] < on[1]? true:false
+ }
+
+ function isEqual(on){
+  return on[0] === on[1]? true:false
+ }
+
+ function add(on){
+  return on[0]+on[1]
+ }
+
+ function minus(on){
+  return on[0]-on[1]
+ }
+
+ function divide(on){
+  return on[0]/on[1]
+ }
+
+ function remainder(on){
+  return on[0]%on[1]
+ }
 
 function value(value){
   return value
@@ -36,4 +57,5 @@ var parse = function(object){
   }
 }
 
-document.body.innerHTML = parse(marline)
+// var test = {isEqual:{minus:{data2:20,data1:20},data2:0} }
+// document.body.innerHTML = parse(test)
