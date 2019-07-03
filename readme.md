@@ -13,12 +13,16 @@
 
 you call ``parse(object)`` and your logic gets executed
   
-    
+ 
 <b>Example</b><br>
 ``var logic = {isEqual:{minus:{data2:20,data1:20},secondParam:0} } //secondParam,data2,data1 are arbitary 
 document.body.innerHTML = parse(logic)
 ``
 <br><br>
+
+<b>Features</b>
+  *Easy Asynchronous support
+  
 <b>built in function</b><br>
 
 add, minus ,divide, remainder, isBig, IsSmall, isEqual
