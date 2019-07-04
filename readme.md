@@ -15,7 +15,7 @@ you call ``parse(object).then(console.log)`` and your logic gets executed
   
  
 <b>Example</b><br>
-``var logic = { isBig:[ { add:[2,21] }, 21] } //secondParam,data2,data1 are arbitary 
+``var logic = { isBig:[ { add:[2,21] }, 21] } 
  parse(logic).then(output => document.body.innerHTML = output)
 ``
 <br><br>
