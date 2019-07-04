@@ -9,14 +9,14 @@
   
 <b>How to</b><br>
 
-``{function name:{parameter} }`` and parameter can be functions <br>
+``{function name: parameter }`` and parameter can be array or object what ever the function accepts and that function could have child and it can go on forever <br>
 
-you call ``parse(object)`` and your logic gets executed
+you call ``parse(object).then(console.log)`` and your logic gets executed
   
  
 <b>Example</b><br>
-``var logic = {isEqual:{minus:{data2:20,data1:20},secondParam:0} } //secondParam,data2,data1 are arbitary 
-document.body.innerHTML = parse(logic)
+``var logic = { isBig:[ { add:[2,21] }, 21] } //secondParam,data2,data1 are arbitary 
+ parse(logic).then(output => document.body.innerHTML = output)
 ``
 <br><br>
 
