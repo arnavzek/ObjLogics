@@ -1,63 +1,24 @@
- function isBig(on) {
-  // var para = [];
+var parse = async function(object,range) {
 
-  // for (let index of on) {
-  //   if (index.then){
-      console.log(on,'checking big')
-  //     await index;
-  //     index.then(nw_value => para.push(nw_value));
-  //   }else{
-  //     para.push(index)
-  //   }
-  // }
+  if(!range) range = new helperFunction()
 
-  // on = para
-  
-  return on[0] > on[1] ? true : false;
-}
-
-function isSmall(on) {
-  return on[0] < on[1] ? true : false;
-}
-
-function isEqual(on) {
-  return on[0] === on[1] ? true : false;
-}
-
-function add(on) {
-  return on[0] + on[1];
-}
-
-function minus(on) {
-  return on[0] - on[1];
-}
-
-function divide(on) {
-  return on[0] / on[1];
-}
-
-function remainder(on) {
-  return on[0] % on[1];
-}
-
-function value(value) {
-  if (typeof value === "number") return value;
-  return value.indexOf("$") === -1 ? value : eval(value.replace("$", ""));
-}
-
-var parse = async function(object) {
   for (let a in object) {
-    var childs = object[a];
-    var parameter = null;
+
+    if(a.indexOf('$') === -1)return object
+    var functionName = a.replace("$", "")
+
+    var childs = object[a]
+    var parameter = null
     var objParameter = {}
     var arrayParameter = []
 
     async function getValue(tm){
 
-      if(typeof tm !== 'object') return value(tm)
+      if(tm === null) return true
+      if(typeof tm !== 'object') return range.value(tm,range)
 
       var finalValue = null
-      var temporary_parameter = await parse(tm)
+      var temporary_parameter = await parse(tm,range)
 
       if(temporary_parameter.then){
         temporary_parameter.then(resultOfP=> finalValue = resultOfP)
@@ -95,8 +56,9 @@ var parse = async function(object) {
       parameter = objParameter
     }
 
-    var virtualFunction = eval(a);
-
+    
+    var virtualFunction = range[functionName];
+    // console.log( window[functionName],'hey',functionName , range[functionName] )
     var output = await virtualFunction(parameter);
 
     if (output.then) {
@@ -109,20 +71,86 @@ var parse = async function(object) {
   }
 };
 
-function getFollowerCount(para) {
-  return new Promise(resolve => setTimeout(() => resolve(para.id), 500));
+
+
+class helperFunction{
+  getFollowerCount(para) {
+    return new Promise(resolve => setTimeout(() => resolve(para.id), 500));
+  }
+
+   isBig(on) {
+    return on[0] > on[1] ? true : false;
+  }
+  
+   isSmall(on) {
+    return on[0] < on[1] ? true : false;
+  }
+  
+   isEqual(on) {
+    return on[0] === on[1] ? true : false;
+  }
+  
+   add(on) {
+    return on[0] + on[1];
+  }
+  
+   minus(on) {
+    return on[0] - on[1];
+  }
+  
+  divide(on) {
+    return on[0] / on[1];
+  }
+  
+  remainder(on) {
+    return on[0] % on[1];
+  }
+  
+  value(value,range) {
+    if (typeof value === "number") return value;
+    var replacedDollar = value.replace("$", "")
+
+    var varTree = replacedDollar.split('.')
+    var TMP = null
+    for(let index of varTree){
+      TMP=== null? TMP = range[index]: TMP = TMP[index]
+    }
+
+    return value.indexOf("$") === -1 ? value : TMP
+  }
 }
 
-//support for both array parameter and object parameter
-var sender = { id: 21 };
+class customFunction extends helperFunction{
 
-var test = { isBig: [{getFollowerCount: { id: "$sender.id" }}, 0 ] };
+  constructor(){
+    super()
+    this.user = { id: 22 }
+    this.writer = { id: 21 }
+  }
+
+  getFollowerCount(para) {
+   return new Promise(resolve => setTimeout(() => resolve(para.id), 500));
+ }
+}
+
+
+var room = new customFunction()
+console.log(room)
+//support for both array parameter and object parameter
+
+
+// var test = { $isBig: [{$getFollowerCount: { id: "$user.id" }}, {$getFollowerCount: { id: "$writer.id" }} ] };
 // var test = { isBig: {  getFollowerCount: { userId: "$sender.id" }, receiver: 0 } };
 // now callers can be either arrays or objects
 //  var test = {getFollowerCount:{id:{add:[2,21]} } }
 // var test = { isBig:[ {getFollowerCount:{id:22}} , 21] }
-
+var test = {$getFollowerCount:{id:{$add:[2,21]} } }
 //why is id an a {getFollowerCount:{id:22}}
+// define local domain
+//sure if you would like to take the pleasure of being  first wonkavatorer and the first dead human on board
 
-document.body.innerHTML = "loading..";
-parse(test).then(res => (document.body.innerHTML = res));
+// console.log(Object.create(room.__proto__,user ),writer,user)
+// room = Object.assign({},writer,room,writer)
+
+document.body.innerHTML = "loading.."; 
+parse(test,room).then(res => (document.body.innerHTML = res));
