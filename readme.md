@@ -11,11 +11,15 @@
 
 ``{function name: parameter }`` and parameter can be array or object what ever the function accepts and that function could have child and it can go on forever <br>
 
-you call ``parse(object).then(console.log)`` and your logic gets executed
+you call ``parse(object,range).then(console.log)`` and your logic gets executed
+  
+  *range is optional to layer additional features
+   *The standard way to make range is build a class which extends helperFunction
+  *$sign tells the parser if an object is a function 
   
  
 <b>Example</b><br>
-``var logic = { isBig:[ { add:[2,21] }, 21] } 
+``var logic = { $isBig:[ { $add:[2,21] }, 21] } 
  parse(logic).then(output => document.body.innerHTML = output)
 ``
 <br><br>
