@@ -11,11 +11,11 @@
 
 ``{function name: parameter }`` and parameter can be array or object what ever the function accepts and that function could have child and it can go on forever <br>
 
-you call ``parse(object,range).then(console.log)`` and your logic gets executed
+you call ``parse(object,range).then(console.log)`` and your logic gets executed<br>
   
-  *range is optional to layer additional features
-   *The standard way to make range is build a class which extends helperFunction
-  *$sign tells the parser if an object is a function 
+  *range is optional to layer additional features<br>
+   *The standard way to make range is build a class which extends helperFunction<br>
+  *$sign tells the parser if an object is a function <br>
   
  
 <b>Example</b><br>
