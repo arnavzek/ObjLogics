@@ -4,7 +4,8 @@ var parse = async function(object,range) {
 
   for (let a in object) {
 
-    if(a.indexOf('$') === -1)return object
+    if(a.indexOf('$') === -1)return range.value(object,range)
+
     var functionName = a.replace("$", "")
 
     var childs = object[a]
@@ -78,6 +79,8 @@ class helperFunction{
     return new Promise(resolve => setTimeout(() => resolve(para.id), 500));
   }
 
+  
+
    isBig(on) {
     return on[0] > on[1] ? true : false;
   }
@@ -107,16 +110,48 @@ class helperFunction{
   }
   
   value(value,range) {
+    
     if (typeof value === "number") return value;
-    var replacedDollar = value.replace("$", "")
+    if (typeof value === "object"){
 
-    var varTree = replacedDollar.split('.')
-    var TMP = null
-    for(let index of varTree){
-      TMP=== null? TMP = range[index]: TMP = TMP[index]
+      console.log('object detected')
+
+      var newTransformedObject = {}
+      
+      //to do object inside object
+      for(let index in value){
+        var valueOfChildObjects = value[index]
+        if( valueOfChildObjects.indexOf('$') === -1){
+          newTransformedObject[index] = value[index]
+        }else{
+          newTransformedObject[index] = breakDots(value[index])
+        }
+      }
+      console.log(newTransformedObject,'hey')
+      return newTransformedObject
+      
+    }else{
+      
+      return value.indexOf("$") === -1 ? value : breakDots(value)
     }
 
-    return value.indexOf("$") === -1 ? value : TMP
+    // if it is a string
+
+
+    
+
+    function breakDots(val){
+      console.log(range)
+      var replacedDollar = val.replace("$", "")
+
+      var varTree = replacedDollar.split('.')
+      var TMP = null
+      for(let index of varTree){
+        TMP=== null? TMP = range[index]: TMP = TMP[index]
+      }
+      return TMP
+    }
+
   }
 }
 
@@ -128,6 +163,13 @@ class customFunction extends helperFunction{
     this.writer = { id: 21 }
   }
 
+  write(par){
+    return new Promise(resolve=>{ 
+      console.log(par)
+      resolve(par)
+    })
+  }
+  
   getFollowerCount(para) {
    return new Promise(resolve => setTimeout(() => resolve(para.id), 500));
  }
@@ -138,13 +180,16 @@ var room = new customFunction()
 console.log(room)
 //support for both array parameter and object parameter
 
+// to do what if functions are not async
 
 // var test = { $isBig: [{$getFollowerCount: { id: "$user.id" }}, {$getFollowerCount: { id: "$writer.id" }} ] };
 // var test = { isBig: {  getFollowerCount: { userId: "$sender.id" }, receiver: 0 } };
 // now callers can be either arrays or objects
 //  var test = {getFollowerCount:{id:{add:[2,21]} } }
 // var test = { isBig:[ {getFollowerCount:{id:22}} , 21] }
-var test = {$getFollowerCount:{id:{$add:[2,21]} } }
+// var test = {$getFollowerCount:{id:{$add:[2,21]} } }
+
+var test = {$write:{on:'questions',put:{content:'what should I ask?',askedBy:'$user.id'}  }}
 //why is id an a {getFollowerCount:{id:22}}
 // define local domain
 //sure if you would like to take the pleasure of being  first wonkavatorer and the first dead human on board
